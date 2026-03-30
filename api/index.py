@@ -10,8 +10,8 @@ def get_db_connection():
     if not db_url:
         raise Exception("POSTGRES_URL environment variable is not set. Please configure Vercel Postgres.")
     
-    # Required for cloud databases like Neon/Vercel Postgres
-    conn = psycopg2.connect(db_url, sslmode='require')
+    # Vercel's POSTGRES_URL already includes ?sslmode=require
+    conn = psycopg2.connect(db_url)
     return conn
 
 @app.route('/api/memo', methods=['GET'])
