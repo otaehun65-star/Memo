@@ -1,0 +1,330 @@
+:root {
+    --primary: #4F46E5;
+    --primary-hover: #4338CA;
+    --secondary: #10B981;
+    --secondary-hover: #059669;
+    --danger: #EF4444;
+    --danger-hover: #DC2626;
+    --surface: rgba(255, 255, 255, 0.75);
+    --border: rgba(255, 255, 255, 0.5);
+    --text: #1F2937;
+    --text-hint: #6B7280;
+    --bg-color: #F3F4F6;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    color: var(--text);
+}
+
+/* Background blobs for premium look */
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+    animation: drift 20s infinite alternate;
+}
+
+.shape1 {
+    width: 400px;
+    height: 400px;
+    background: rgba(79, 70, 229, 0.3);
+    top: -100px;
+    left: -100px;
+}
+
+.shape2 {
+    width: 300px;
+    height: 300px;
+    background: rgba(16, 185, 129, 0.3);
+    bottom: -100px;
+    right: -100px;
+    animation-delay: -5s;
+}
+
+@keyframes drift {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 50px) scale(1.1); }
+}
+
+/* Main Container - Glassmorphism */
+.glass-container {
+    background: var(--surface);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.1);
+    transform: translateY(20px);
+    opacity: 0;
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideUp {
+    to { transform: translateY(0); opacity: 1; }
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.icon-wrap {
+    font-size: 48px;
+    margin-bottom: 10px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, #1F2937, #4B5563);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.textarea-wrapper {
+    position: relative;
+    margin-bottom: 24px;
+}
+
+textarea {
+    width: 100%;
+    height: 120px;
+    padding: 16px;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.9);
+    font-family: inherit;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--text);
+    resize: none;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+textarea::placeholder {
+    color: var(--text-hint);
+}
+
+.char-count {
+    position: absolute;
+    bottom: -20px;
+    right: 5px;
+    font-size: 12px;
+    color: var(--text-hint);
+    font-weight: 500;
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 30px;
+}
+
+.btn {
+    flex: 1;
+    padding: 14px 10px;
+    border: none;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+    color: white;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255,255,255,0.2);
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.btn:hover::after { opacity: 1; }
+.btn:active { transform: scale(0.96); }
+
+.btn.primary { background: var(--primary); box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); }
+.btn.secondary { background: var(--secondary); box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3); }
+.btn.danger { background: var(--danger); box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3); }
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #1F2937;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 10px 25px -5px rgba(0,0,0,0.2);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 100;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Memo List Styles */
+.memo-list-wrapper {
+    margin-top: 30px;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.memo-list-wrapper.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.list-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.memo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+/* Custom scrollbar */
+.memo-list::-webkit-scrollbar {
+    width: 6px;
+}
+.memo-list::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.05);
+    border-radius: 3px;
+}
+.memo-list::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.2);
+    border-radius: 3px;
+}
+
+.memo-item {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+.memo-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.memo-content {
+    font-size: 14px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    word-break: break-all;
+    flex: 1;
+}
+
+.memo-date {
+    font-size: 11px;
+    color: var(--text-hint);
+    margin-top: 8px;
+}
+
+.memo-item.delete-mode {
+    border-color: var(--danger);
+    cursor: pointer;
+}
+
+.memo-item.delete-mode:hover {
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.delete-icon {
+    display: none;
+    color: var(--danger);
+    background: rgba(239, 68, 68, 0.1);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.memo-item.delete-mode .delete-icon {
+    display: flex;
+}
+
+.delete-icon:hover {
+    background: var(--danger);
+    color: white;
+}
+
+@media (max-width: 480px) {
+    .glass-container {
+        margin: 20px;
+        padding: 30px 20px;
+    }
+    .button-group {
+        flex-direction: column;
+    }
+}

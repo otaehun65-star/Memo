@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Daily Memo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=2">
+</head>
+<body>
+    <div class="blob shape1"></div>
+    <div class="blob shape2"></div>
+    
+    <div class="glass-container">
+        <header>
+            <div class="icon-wrap">✏️</div>
+            <h1>나의 한 줄 메모</h1>
+        </header>
+
+        <main>
+            <div class="textarea-wrapper">
+                <textarea id="memoInput" placeholder="오늘 떠오른 생각을 남겨보세요... (2~3줄)" spellcheck="false"></textarea>
+                <div class="char-count" id="charCount">0/150</div>
+            </div>
+            
+            <div class="button-group">
+                <button id="btnSave" class="btn primary" onclick="saveMemo()">
+                    <span class="btn-text">저장</span>
+                </button>
+                <button id="btnLoad" class="btn secondary" onclick="loadMemo('view')">
+                    <span class="btn-text">불러오기</span>
+                </button>
+                <button id="btnDelete" class="btn danger" onclick="loadMemo('delete')">
+                    <span class="btn-text">삭제</span>
+                </button>
+            </div>
+
+            <div id="memoListWrapper" class="memo-list-wrapper hidden">
+                <h3 id="listTitle" class="list-title">저장된 메모</h3>
+                <div id="memoList" class="memo-list"></div>
+            </div>
+        </main>
+
+        <div id="toast" class="toast hidden">
+            <span id="toastMessage"></span>
+        </div>
+    </div>
+    
+    <script src="script.js?v=2"></script>
+</body>
+</html>
